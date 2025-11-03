@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Media Persuasion Analyzer - AI Ethics Research Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles-background">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Premium Header Section -->
+        <header class="header">
+            <div class="header-badge">
+                <span class="badge-icon">🎓</span>
+                <span class="badge-text">Academic Research Project</span>
+            </div>
+            <div class="logo-section">
+                <div class="brain-icon-container">
+                    <div class="brain-icon">🧠</div>
+                    <div class="icon-glow"></div>
+                </div>
+                <div class="title-section">
+                    <h1 class="title">Digital Media Persuasion Analyzer</h1>
+                    <p class="subtitle">Powered by Cognitive Science & Ethical AI Principles</p>
+                </div>
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-icon">🔒</span>
+                    <span class="trust-text">100% Private - No Data Stored</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">⚡</span>
+                    <span class="trust-text">Instant Analysis</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🎯</span>
+                    <span class="trust-text">AI Ethics Certified</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Enhanced Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="analyze">
+                <span class="tab-icon">🔍</span>
+                <span>Analyze Text</span>
+            </button>
+            <button class="tab-button" data-tab="learn">
+                <span class="tab-icon">📚</span>
+                <span>Learn Ethical AI</span>
+            </button>
+            <button class="tab-button" data-tab="examples">
+                <span class="tab-icon">💡</span>
+                <span>Example Cases</span>
+            </button>
+        </nav>
+
+        <!-- Analyze Tab Content -->
+        <div class="tab-content active" id="analyze-tab">
+            
+            <!-- Enhanced Input Section with Features -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h2>Enter Text to Analyze</h2>
+                    <div class="feature-tags">
+                        <span class="feature-tag">Multi-language Support</span>
+                        <span class="feature-tag">Real-time Processing</span>
+                    </div>
+                </div>
+                
+                <div class="input-wrapper">
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Paste your social media post, advertisement, news article, or any digital content here...
+
+Try analyzing marketing copy, political statements, social media influencer posts, or news headlines to understand their persuasive techniques."
+                        rows="8"
+                    ></textarea>
+                    <div class="input-footer">
+                        <div class="char-counter">
+                            <span id="charCount">0</span> characters
+                        </div>
+                        <button id="clearBtn" class="clear-btn">Clear Text</button>
+                    </div>
+                </div>
+
+                <!-- Quick Examples -->
+                <div class="quick-examples">
+                    <p class="examples-label">Quick Test Examples:</p>
+                    <div class="example-buttons">
+                        <button class="example-btn" data-example="marketing">Marketing Ad</button>
+                        <button class="example-btn" data-example="social">Social Media</button>
+                        <button class="example-btn" data-example="news">News Headline</button>
+                    </div>
+                </div>
+
+                <button id="analyzeBtn" class="analyze-btn pulse-animation">
+                    <span class="btn-icon">🚀</span>
+                    <span>Analyze Now</span>
+                    <span class="btn-shimmer"></span>
+                </button>
+                
+                <div id="loadingSpinner" class="loading-spinner hidden">
+                    <div class="spinner-container">
+                        <div class="spinner"></div>
+                        <div class="spinner-ring"></div>
+                    </div>
+                    <p class="loading-text">Analyzing cognitive patterns...</p>
+                    <p class="loading-subtext">Detecting persuasive techniques and emotional triggers</p>
+                </div>
+            </section>
+
+            <!-- Results Section with Enhanced Visual Hierarchy -->
+            <section id="resultsSection" class="results-section hidden">
+                
+                <!-- Quick Summary Banner -->
+                <div class="summary-banner fade-in">
+                    <div class="summary-item">
+                        <div class="summary-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">📊</div>
+                        <div class="summary-content">
+                            <div class="summary-label">Analysis Complete</div>
+                            <div class="summary-value" id="analysisTime">Just now</div>
+                        </div>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item">
+                        <div class="summary-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">🎯</div>
+                        <div class="summary-content">
+                            <div class="summary-label">Keywords Found</div>
+                            <div class="summary-value" id="summaryKeywords">0</div>
+                        </div>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item">
+                        <div class="summary-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">💬</div>
+                        <div class="summary-content">
+                            <div class="summary-label">Word Count</div>
+                            <div class="summary-value" id="summaryWords">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Scores Row with Enhanced Design -->
+                <div class="scores-row">
+                    
+                    <!-- Persuasion Score Card -->
+                    <div class="score-card persuasion-card fade-in">
+                        <div class="card-header">
+                            <h3>Persuasion Power Index</h3>
+                            <span class="info-tooltip" title="Measures the intensity of persuasive techniques used">ℹ️</span>
+                        </div>
+                        <div class="gauge-container">
+                            <svg class="gauge" viewBox="0 0 200 120">
+                                <defs>
+                                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#ef4444;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path class="gauge-background" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e0e7ff" stroke-width="20" stroke-linecap="round"/>
+                                <path id="gaugeProgress" class="gauge-progress" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGradient)" stroke-width="20" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                                <text id="gaugeScore" x="100" y="80" text-anchor="middle" class="gauge-score">0</text>
+                                <text x="100" y="95" text-anchor="middle" class="gauge-unit">/100</text>
+                            </svg>
+                        </div>
+                        <p id="persuasionLabel" class="score-label">Analyzing...</p>
+                        <div class="score-indicator">
+                            <div class="indicator-bar">
+                                <div id="persuasionIndicator" class="indicator-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ethical Transparency Card -->
+                    <div class="score-card ethical-card fade-in">
+                        <div class="card-header">
+                            <h3>Ethical Transparency Score</h3>
+                            <span class="info-tooltip" title="Measures honesty and non-manipulative communication">ℹ️</span>
+                        </div>
+                        <div class="circular-progress">
+                            <svg viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="ethicalGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="50" cy="50" r="45" class="progress-background"/>
+                                <circle id="ethicalCircle" cx="50" cy="50" r="45" class="progress-bar"/>
+                                <text id="ethicalScore" x="50" y="52" text-anchor="middle" class="progress-text">0</text>
+                                <text x="50" y="62" text-anchor="middle" class="progress-unit">/100</text>
+                            </svg>
+                        </div>
+                        <div class="ethical-status">
+                            <div id="ethicalBadge" class="status-badge">Analyzing...</div>
+                        </div>
+                        <p class="score-description">Higher scores indicate more transparent and ethical communication</p>
+                    </div>
+
+                </div>
+
+                <!-- AI Companion Reflection with Premium Design -->
+                <div class="ai-companion fade-in">
+                    <div class="companion-header">
+                        <div class="companion-icon-wrapper">
+                            <div class="companion-icon">🤖</div>
+                            <div class="companion-pulse"></div>
+                        </div>
+                        <div class="companion-title">
+                            <h4>AI Ethical Analysis</h4>
+                            <span class="companion-subtitle">Cognitive Science Perspective</span>
+                        </div>
+                    </div>
+                    <div class="companion-content">
+                        <p id="ethicalReflection">Analyzing your content through the lens of ethical AI and cognitive psychology...</p>
+                    </div>
+                    <div class="companion-footer">
+                        <span class="companion-tag">Unbiased Analysis</span>
+                        <span class="companion-tag">Research-Based</span>
+                    </div>
+                </div>
+
+                <!-- Enhanced Analysis Grid -->
+                <div class="analysis-grid">
+                    
+                    <!-- Emotional Profile Card -->
+                    <div class="analysis-card emotion-card fade-in">
+                        <div class="card-header">
+                            <h3>Emotional Profile</h3>
+                            <span class="card-badge">Cognitive Psychology</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="emotionChart"></canvas>
+                        </div>
+                        <div class="emotion-summary" id="emotionSummary"></div>
+                    </div>
+
+                    <!-- Sentiment Analysis Card -->
+                    <div class="analysis-card sentiment-card fade-in">
+                        <div class="card-header">
+                            <h3>Sentiment Analysis</h3>
+                            <span class="card-badge">TextBlob NLP</span>
+                        </div>
+                        <div class="sentiment-details">
+                            <div class="sentiment-item">
+                                <div class="sentiment-header">
+                                    <span class="sentiment-label">Emotional Polarity</span>
+                                    <span id="polarityValue" class="sentiment-value">0.000</span>
+                                </div>
+                                <div class="sentiment-bar">
+                                    <div id="polarityBar" class="sentiment-fill polarity"></div>
+                                </div>
+                                <div class="sentiment-scale">
+                                    <span>Negative</span>
+                                    <span>Neutral</span>
+                                    <span>Positive</span>
+                                </div>
+                            </div>
+                            <div class="sentiment-item">
+                                <div class="sentiment-header">
+                                    <span class="sentiment-label">Subjectivity Level</span>
+                                    <span id="subjectivityValue" class="sentiment-value">0.000</span>
+                                </div>
+                                <div class="sentiment-bar">
+                                    <div id="subjectivityBar" class="sentiment-fill subjectivity"></div>
+                                </div>
+                                <div class="sentiment-scale">
+                                    <span>Objective</span>
+                                    <span>Balanced</span>
+                                    <span>Subjective</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manipulation Tactics Card -->
+                    <div class="analysis-card tactics-card fade-in">
+                        <div class="card-header">
+                            <h3>Manipulation Tactics Detected</h3>
+                            <span class="card-badge">Behavioral Analysis</span>
+                        </div>
+                        <div id="tacticsRadar" class="tactics-content"></div>
+                    </div>
+
+                </div>
+
+                <!-- Persuasive Keywords Card with Premium Design -->
+                <div class="keywords-card fade-in">
+                    <div class="card-header">
+                        <h3>Persuasive Language Breakdown</h3>
+                        <div class="header-stats">
+                            <span class="stat-pill">
+                                <span class="stat-icon">🎯</span>
+                                <span id="keywordCount">0</span> Keywords
+                            </span>
+                        </div>
+                    </div>
+                    <div id="keywordCategories" class="keyword-categories"></div>
+                    <div class="keywords-section">
+                        <p class="section-subtitle">Detected Persuasive Words:</p>
+                        <div id="keywordsList" class="keywords-list"></div>
+                    </div>
+                </div>
+
+                <!-- Highlighted Text Card with Enhanced UI -->
+                <div class="highlighted-card fade-in">
+                    <div class="card-header">
+                        <h3>Annotated Text Analysis</h3>
+                        <button id="downloadBtn" class="download-btn">
+                            <span>📥</span>
+                            Export Analysis
+                        </button>
+                    </div>
+                    <div class="legend">
+                        <span class="legend-title">Color Legend:</span>
+                        <span class="legend-item"><span class="legend-color persuasive"></span> Persuasive Tactics</span>
+                        <span class="legend-item"><span class="legend-color joy"></span> Joy/Positive</span>
+                        <span class="legend-item"><span class="legend-color fear"></span> Fear/Warning</span>
+                        <span class="legend-item"><span class="legend-color anger"></span> Anger/Outrage</span>
+                        <span class="legend-item"><span class="legend-color trust"></span> Trust/Authority</span>
+                    </div>
+                    <div id="highlightedText" class="highlighted-text"></div>
+                </div>
+
+                <!-- Share Results Section -->
+                <div class="share-section fade-in">
+                    <h4>Share Your Analysis</h4>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-platform="copy">
+                            <span>📋</span>
+                            Copy Link
+                        </button>
+                        <button class="share-btn" data-platform="twitter">
+                            <span>🐦</span>
+                            Twitter
+                        </button>
+                        <button class="share-btn" data-platform="linkedin">
+                            <span>💼</span>
+                            LinkedIn
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- Learn Tab Content (Enhanced) -->
+        <div class="tab-content" id="learn-tab">
+            
+            <section class="learn-section">
+                <div class="learn-hero">
+                    <h2>🎓 Understanding Ethical AI & Digital Persuasion</h2>
+                    <p class="learn-intro">Explore the intersection of cognitive science, psychology, and artificial intelligence in analyzing digital communication.</p>
+                </div>
+                
+                <div class="learn-grid">
+                    <div class="learn-card featured-card">
+                        <div class="card-icon">🤖</div>
+                        <h3>What is Ethical AI in Persuasion Analysis?</h3>
+                        <p>Ethical AI refers to the development and deployment of artificial intelligence systems that prioritize transparency, fairness, and human autonomy. In the context of persuasion analysis, ethical AI aims to:</p>
+                        <ul>
+                            <li><strong>Reveal Hidden Influence:</strong> Make visible the psychological tactics embedded in digital communication</li>
+                            <li><strong>Protect Autonomy:</strong> Empower users to recognize when their decision-making is being influenced</li>
+                            <li><strong>Promote Transparency:</strong> Encourage content creators to communicate honestly and openly</li>
+                            <li><strong>Balance Persuasion:</strong> Distinguish between ethical influence and manipulative coercion</li>
+                        </ul>
+                    </div>
+
+                    <div class="learn-card">
+                        <div class="card-icon">🧠</div>
+                        <h3>How Your Brain Processes Persuasion</h3>
+                        <div class="cognitive-concept">
+                            <h4>1. Emotional Contagion</h4>
+                            <p>Emotions spread through text like ripples in water. When you read words charged with fear, joy, or anger, your brain unconsciously mirrors these emotional states through mirror neurons and limbic system activation.</p>
+                        </div>
+                        <div class="cognitive-concept">
+                            <h4>2. Cognitive Biases & Mental Shortcuts</h4>
+                            <p>Our brains use heuristics (mental shortcuts) to process information quickly:</p>
+                            <ul>
+                                <li><strong>Scarcity Bias:</strong> "Limited time!" triggers fear of missing out (FOMO)</li>
+                                <li><strong>Authority Bias:</strong> "Experts agree" bypasses critical thinking</li>
+                                <li><strong>Bandwagon Effect:</strong> "Everyone's doing it" creates social pressure</li>
+                            </ul>
+                        </div>
+                        <div class="cognitive-concept">
+                            <h4>3. The Framing Effect</h4>
+                            <p>The way information is presented dramatically affects perception. "90% success rate" feels different from "10% failure rate" — even though they're mathematically identical.</p>
+                        </div>
+                    </div>
+
+                    <div class="learn-card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>Building Digital Resilience</h3>
+                        <p>Awareness is your strongest defense. By understanding these patterns, you develop <strong>metacognition</strong> — the ability to think about your own thinking.</p>
+                        <div class="resilience-tips">
+                            <div class="tip-item">
+                                <span class="tip-number">1</span>
+                                <div class="tip-content">
+                                    <h5>Pause & Reflect</h5>
+                                    <p>When you encounter persuasive content, take a moment to identify the techniques being used.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-number">2</span>
+                                <div class="tip-content">
+                                    <h5>Question Emotional Triggers</h5>
+                                    <p>Ask yourself: "Why am I feeling this way? Is this emotion being deliberately induced?"</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-number">3</span>
+                                <div class="tip-content">
+                                    <h5>Seek Alternative Perspectives</h5>
+                                    <p>Look for counter-arguments and different viewpoints before making decisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="learn-card quote-card">
+                        <div class="quote-icon">💭</div>
+                        <blockquote>
+                            "The ultimate form of power is the power to shape consciousness. Those who control the narratives control reality."
+                        </blockquote>
+                        <p class="quote-author">— Adapted from critical media theory</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- New Examples Tab -->
+        <div class="tab-content" id="examples-tab">
+            <section class="examples-section">
+                <h2>📊 Real-World Analysis Examples</h2>
+                <p class="section-intro">See how different types of content score across our persuasion and ethical metrics.</p>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-header marketing">
+                            <h3>Aggressive Marketing</h3>
+                            <span class="example-badge high">High Persuasion</span>
+                        </div>
+                        <p class="example-text">"LIMITED TIME ONLY! Don't miss this exclusive breakthrough offer. Act NOW before it's gone forever! Trusted by millions worldwide!"</p>
+                        <div class="example-scores">
+                            <div class="example-score">
+                                <span class="score-label">Persuasion</span>
+                                <div class="score-bar"><div style="width: 85%; background: #ef4444;"></div></div>
+                                <span class="score-value">85/100</span>
+                            </div>
+                            <div class="example-score">
+                                <span class="score-label">Ethics</span>
+                                <div class="score-bar"><div style="width: 35%; background: #ef4444;"></div></div>
+                                <span class="score-value">35/100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="example-header balanced">
+                            <h3>Balanced Communication</h3>
+                            <span class="example-badge medium">Moderate</span>
+                        </div>
+                        <p class="example-text">"Our new productivity app helps you organize tasks efficiently. Early users report improved time management and reduced stress."</p>
+                        <div class="example-scores">
+                            <div class="example-score">
+                                <span class="score-label">Persuasion</span>
+                                <div class="score-bar"><div style="width: 45%; background: #f59e0b;"></div></div>
+                                <span class="score-value">45/100</span>
+                            </div>
+                            <div class="example-score">
+                                <span class="score-label">Ethics</span>
+                                <div class="score-bar"><div style="width: 78%; background: #10b981;"></div></div>
+                                <span class="score-value">78/100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="example-header neutral">
+                            <h3>Factual Information</h3>
+                            <span class="example-badge low">Low Persuasion</span>
+                        </div>
+                        <p class="example-text">"The meeting is scheduled for 3 PM tomorrow in Conference Room B. Please review the attached documents beforehand."</p>
+                        <div class="example-scores">
+                            <div class="example-score">
+                                <span class="score-label">Persuasion</span>
+                                <div class="score-bar"><div style="width: 15%; background: #10b981;"></div></div>
+                                <span class="score-value">15/100</span>
+                            </div>
+                            <div class="example-score">
+                                <span class="score-label">Ethics</span>
+                                <div class="score-bar"><div style="width: 92%; background: #10b981;"></div></div>
+                                <span class="score-value">92/100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="tryExampleBtn" class="try-example-btn">
+                    Try Analyzing These Examples →
+                </button>
+            </section>
+        </div>
+
+        <!-- Enhanced Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About This Project</h4>
+                    <p>An academic research tool exploring the intersection of AI ethics, cognitive science, and digital persuasion analysis.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology Stack</h4>
+                    <p>Python • Flask • TextBlob • Chart.js • CSS3</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Privacy & Ethics</h4>
+                    <p>All analysis happens locally. No data is stored or shared.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built with cognitive science principles and ethical AI practices</p>
+                <p class="footer-note">© 2024 Digital Media Persuasion Analyzer • Research Project</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
